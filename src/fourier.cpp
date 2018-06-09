@@ -43,9 +43,9 @@ class ft {
 
 			// si la cantidad de elementos del vector no es potencia de 2, agregamos
 			// 0s hasta completar tamaño con proxima potencia de 2
-			unsigned int tam = input_.tamano();			
+			unsigned int tam = input_.tamano();
 			bool powerOfTwo = !(tam == 0) && !(tam & (tam - 1));
-			if( !powerOfTwo ){				
+			if( !powerOfTwo ){
 				unsigned int v = tam;
 				v--;
 				v |= v >> 1;
@@ -53,12 +53,12 @@ class ft {
 				v |= v >> 4;
 				v |= v >> 8;
 				v |= v >> 16;
-				v++;		
+				v++;
 
 				for(int i=0; i < (v-tam) ; i++){
 					complejo aux(0.0,0.0);
 					input_.insertar_despues(aux, it);
-					it = input_.ultimo();					
+					it = input_.ultimo();
 				}
 			}
 
@@ -85,27 +85,27 @@ class ft {
 
 	// public members
 	public:
-		ft() {			
+		ft() {
 			is_ = &cin;
 			os_ = &cout;
 		}
 
-		ft(istream *is) {			
+		ft(istream *is) {
 			is_ = is;
 			os_ = &cout;
 		}
 
-		ft(ostream *os) {			
+		ft(ostream *os) {
 			is_ = &cin;
 			os_ = os;
 		}
 
-		ft(istream *is, ostream *os) {			
+		ft(istream *is, ostream *os) {
 			is_ = is;
 			os_ = os;
 		}
 
-		virtual ~ft() {			
+		virtual ~ft() {
 		}
 
 		void compute() {
@@ -166,27 +166,27 @@ class dft : public ft {
 
 	// public members
 	public:
-		dft() {			
+		dft() {
 			is_ = &cin;
 			os_ = &cout;
 		}
 
-		dft(istream *is) {			
+		dft(istream *is) {
 			is_ = is;
 			os_ = &cout;
 		}
 
-		dft(ostream *os) {			
+		dft(ostream *os) {
 			is_ = &cin;
 			os_ = os;
 		}
 
-		dft(istream *is, ostream *os) {			
+		dft(istream *is, ostream *os) {
 			is_ = is;
 			os_ = os;
 		}
 
-		~dft() {			
+		~dft() {
 		}
 };
 
@@ -205,27 +205,27 @@ class idft : public dft {
 
 	// public members
 	public:
-		idft() {			
+		idft() {
 			is_ = &cin;
 			os_ = &cout;
 		}
 
-		idft(istream *is) {			
+		idft(istream *is) {
 			is_ = is;
 			os_ = &cout;
 		}
 
-		idft(ostream *os) {			
+		idft(ostream *os) {
 			is_ = &cin;
 			os_ = os;
 		}
 
-		idft(istream *is, ostream *os) {			
+		idft(istream *is, ostream *os) {
 			is_ = is;
 			os_ = os;
 		}
 
-		~idft() {			
+		~idft() {
 		}
 };
 
@@ -241,13 +241,13 @@ class fft : public ft {
 		virtual void run_algorithm() {
 			lista<complejo> X = recursive_algorithm(input_);
 			lista<complejo>::iterador it = X.primero();
-	
+
 			double norm = get_norm();
 
 			while(!it.extremo()){
 				*os_ << it.dato() * norm << " ";
 				it.avanzar();
-			} 
+			}
 
 			*os_ << endl;
 		}
@@ -257,7 +257,7 @@ class fft : public ft {
 
 			if (N <= 1) {
 				return v;
-			}			
+			}
 
 			lista<complejo> v_even_parts;
 			lista<complejo> v_odd_parts;
@@ -307,13 +307,13 @@ class fft : public ft {
 			{
 				arg = 2 * M_PI * k  / N;
 				w = (cos(arg) + j.conjugado() * sin(arg));
-			
-				complejo t = w * it_H.dato();				
+
+				complejo t = w * it_H.dato();
 				X.insertar_despues(it_G.dato()+t,it_X);
 				if(!it_G.extremo()) it_G.avanzar();
-				if(!it_H.extremo()) it_H.avanzar();	
+				if(!it_H.extremo()) it_H.avanzar();
 				it_X = X.ultimo();
-			}	
+			}
 
 			it_G = G.primero();
 			it_H = H.primero();
@@ -323,39 +323,39 @@ class fft : public ft {
 			{
 				arg = 2 * M_PI * k  / N;
 				w = (cos(arg) + j.conjugado() * sin(arg));
-			
-				complejo t = w * it_H.dato();				
+
+				complejo t = w * it_H.dato();
 				X.insertar_despues(it_G.dato()-t,it_X);
 				if(!it_G.extremo()) it_G.avanzar();
-				if(!it_H.extremo()) it_H.avanzar();	
+				if(!it_H.extremo()) it_H.avanzar();
 				it_X = X.ultimo();
-			}	
+			}
 			return X;
 		}
 
 	// public members
 	public:
-		fft() {			
+		fft() {
 			is_ = &cin;
 			os_ = &cout;
 		}
 
-		fft(istream *is) {			
+		fft(istream *is) {
 			is_ = is;
 			os_ = &cout;
 		}
 
-		fft(ostream *os) {			
+		fft(ostream *os) {
 			is_ = &cin;
 			os_ = os;
 		}
 
-		fft(istream *is, ostream *os) {			
+		fft(istream *is, ostream *os) {
 			is_ = is;
 			os_ = os;
 		}
 
-		~fft() {			
+		~fft() {
 		}
 };
 
@@ -374,7 +374,7 @@ class ifft : public fft {
 
 	// public members
 	public:
-		ifft() {			
+		ifft() {
 			is_ = &cin;
 			os_ = &cout;
 		}
@@ -384,16 +384,16 @@ class ifft : public fft {
 			os_ = &cout;
 		}
 
-		ifft(ostream *os) {			
+		ifft(ostream *os) {
 			is_ = &cin;
 			os_ = os;
 		}
 
-		ifft(istream *is, ostream *os) {			
+		ifft(istream *is, ostream *os) {
 			is_ = is;
 			os_ = os;
 		}
 
-		~ifft() {			
+		~ifft() {
 		}
 };

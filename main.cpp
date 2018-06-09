@@ -65,7 +65,7 @@ static option_t options[] = {
 	{ 0, },
 };
 
-enum Methods {DFT,IDFT,FFT,IFFT}; 
+enum Methods {DFT,IDFT,FFT,IFFT};
 
 static Methods method;
 static istream *iss = 0;	// Input Stream (clase para manejo de los flujos de entrada)
@@ -130,26 +130,25 @@ opt_output(string const &arg) {
 
 static void
 opt_method(string const &arg) {
-
-	// Intentamos extraer el metodo de la linea de comandos (DFT, IDFT, FFT o IFFT). 
-	// 
-	if (arg == "DFT") { 
-		// Establezco metodo como DFT 
-		method = DFT; 
-	} else if (arg == "IDFT") { 
-		// Establezco metodo como IDFT 
-		method = IDFT; 
-	} else if (arg == "FFT") { 
-		// Establezco metodo como IDFT 
-		method = FFT; 
-	} else if (arg == "IFFT") { 
-		// Establezco metodo como IDFT 
-		method = IFFT; 				
-	} else { 
-		cerr << "La opcion 'method' provista es invalida." 
-			<< endl; 
-		// EXIT: Terminacion del programa en su totalidad 
-		exit(1); 
+	// Intentamos extraer el metodo de la linea de comandos (DFT, IDFT, FFT o IFFT).
+	//
+	if (arg == "DFT") {
+		// Establezco metodo como DFT
+		method = DFT;
+	} else if (arg == "IDFT") {
+		// Establezco metodo como IDFT
+		method = IDFT;
+	} else if (arg == "FFT") {
+		// Establezco metodo como IDFT
+		method = FFT;
+	} else if (arg == "IFFT") {
+		// Establezco metodo como IDFT
+		method = IFFT;
+	} else {
+		cerr << "La opcion 'method' provista es invalida."
+			<< endl;
+		// EXIT: Terminacion del programa en su totalidad
+		exit(1);
 	}
 }
 
