@@ -4,23 +4,29 @@
 
 Los siguientes requerimientos son necesarios
 
-#### Descarga del codigo fuente
+### Descarga del codigo fuente
 
 #### Via ssh keys
+
+```bash
+$ git clone git@github.com:cristiandouce/tp2-algo2.git
+# cloning repository to ./tp2-algo2
 ```
-git clone git@github.com:cristiandouce/tp2-algo2.git
-```
+
 > Requiere cuenta en [GitHub](https://github.com/)
 
 #### Via https
+
+```bash
+$ git clone https://github.com/ruso86/tp2-algo2
+# cloning repository to ./tp2-algo2
 ```
-git clone https://github.com/ruso86/tp2-algo2
-```
+
 > Requiere cuenta en [GitHub](https://github.com/)
 
 #### Zip file
-- [Descargar ZIP file](https://github.com/ruso86/tp2-algo2/archive/master.zip)
 
+- [Descargar ZIP file](https://github.com/ruso86/tp2-algo2/archive/master.zip)
 
 ## Compilacion
 
@@ -49,5 +55,7 @@ $ ./bin/tp2 -m IDFT
 ```
 
 ## Links
+
 ### VSCode
- - [VS Code: C++ Development With Visual Studio Code](https://www.youtube.com/watch?v=X7CXjKGi_ro)
+
+- [VS Code: C++ Development With Visual Studio Code](https://www.youtube.com/watch?v=X7CXjKGi_ro)
