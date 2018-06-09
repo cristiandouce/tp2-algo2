@@ -6,11 +6,12 @@
 #include <cmath>
 #include <complex>
 #include <string>
+
 #include "../vendor/lista.h"
 #include "../vendor/complejo.h"
+#include "./utils.h"
 
 using namespace std;
-
 class ft {
 	// private members
 
@@ -19,6 +20,11 @@ class ft {
 		lista<complejo> input_;
 		istream *is_;
 		ostream *os_;
+
+		void assign_streams(istream *is, ostream *os) {
+			is_ = is;
+			os_ = os;
+		};
 
 		void read_input_line() {
 			complejo aux;
@@ -41,22 +47,14 @@ class ft {
 				it = input_.ultimo();
 			}
 
-			// si la cantidad de elementos del vector no es potencia de 2, agregamos
-			// 0s hasta completar tamaño con proxima potencia de 2
+			// Si la cantidad de elementos del vector no es potencia de 2,
+			// agregamos 0s hasta completar tamaño con proxima potencia de 2
 			unsigned int tam = input_.tamano();
-			bool powerOfTwo = !(tam == 0) && !(tam & (tam - 1));
-			if( !powerOfTwo ){
-				unsigned int v = tam;
-				v--;
-				v |= v >> 1;
-				v |= v >> 2;
-				v |= v >> 4;
-				v |= v >> 8;
-				v |= v >> 16;
-				v++;
+			unsigned int v = next_power2(tam);
 
-				for(int i=0; i < (v-tam) ; i++){
-					complejo aux(0.0,0.0);
+			if (tam < v) {
+				for(int i=0; i < (v-tam); i++){
+					complejo aux (0.0, 0.0);
 					input_.insertar_despues(aux, it);
 					it = input_.ultimo();
 				}
@@ -86,23 +84,19 @@ class ft {
 	// public members
 	public:
 		ft() {
-			is_ = &cin;
-			os_ = &cout;
+			assign_streams(&cin, &cout);
 		}
 
 		ft(istream *is) {
-			is_ = is;
-			os_ = &cout;
+			assign_streams(is, &cout);
 		}
 
 		ft(ostream *os) {
-			is_ = &cin;
-			os_ = os;
+			assign_streams(&cin, os);
 		}
 
 		ft(istream *is, ostream *os) {
-			is_ = is;
-			os_ = os;
+			assign_streams(is, os);
 		}
 
 		virtual ~ft() {
@@ -167,23 +161,19 @@ class dft : public ft {
 	// public members
 	public:
 		dft() {
-			is_ = &cin;
-			os_ = &cout;
+			assign_streams(&cin, &cout);
 		}
 
 		dft(istream *is) {
-			is_ = is;
-			os_ = &cout;
+			assign_streams(is, &cout);
 		}
 
 		dft(ostream *os) {
-			is_ = &cin;
-			os_ = os;
+			assign_streams(&cin, os);
 		}
 
 		dft(istream *is, ostream *os) {
-			is_ = is;
-			os_ = os;
+			assign_streams(is, os);
 		}
 
 		~dft() {
@@ -206,23 +196,19 @@ class idft : public dft {
 	// public members
 	public:
 		idft() {
-			is_ = &cin;
-			os_ = &cout;
+			assign_streams(&cin, &cout);
 		}
 
 		idft(istream *is) {
-			is_ = is;
-			os_ = &cout;
+			assign_streams(is, &cout);
 		}
 
 		idft(ostream *os) {
-			is_ = &cin;
-			os_ = os;
+			assign_streams(&cin, os);
 		}
 
 		idft(istream *is, ostream *os) {
-			is_ = is;
-			os_ = os;
+			assign_streams(is, os);
 		}
 
 		~idft() {
@@ -270,8 +256,7 @@ class fft : public ft {
 		}
 
 		void particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd) {
-			int N = v.tamano();
-			int i = 0;
+			size_t i = 0;
 			lista<complejo>::iterador it = v.primero();
 			lista<complejo>::iterador itOdd;
 			lista<complejo>::iterador itEven;
@@ -279,10 +264,10 @@ class fft : public ft {
 			do {
 				if (i % 2) {
 					itOdd = odd.ultimo();
-					odd.insertar_despues(it.dato(),itOdd);
+					odd.insertar_despues(it.dato(), itOdd);
 				} else {
 					itEven = even.ultimo();
-					even.insertar_despues(it.dato(),itEven);
+					even.insertar_despues(it.dato(), itEven);
 				}
 
 				i++;
@@ -290,7 +275,7 @@ class fft : public ft {
 			} while (!it.extremo());
 		}
 
-		lista<complejo> recompone(lista<complejo> &G, lista<complejo> &H, int N) {
+		lista<complejo> recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
 			lista<complejo> X;
 
 			lista<complejo>::iterador it_G = G.primero();
@@ -302,9 +287,8 @@ class fft : public ft {
 			complejo w;
 
 			// combine
-			//Para X[k] con 0 < k < N/2
-			for (int k = 0; k < N/2; ++k)
-			{
+			// Para X[k] con 0 < k < N/2
+			for (int k = 0; k < N/2; ++k) {
 				arg = 2 * M_PI * k  / N;
 				w = (cos(arg) + j.conjugado() * sin(arg));
 
@@ -319,8 +303,7 @@ class fft : public ft {
 			it_H = H.primero();
 
 			//Para X[k] con N/2 < k < N
-			for (int k = 0; k < N/2; ++k)
-			{
+			for (int k = 0; k < N/2; ++k) {
 				arg = 2 * M_PI * k  / N;
 				w = (cos(arg) + j.conjugado() * sin(arg));
 
@@ -330,29 +313,26 @@ class fft : public ft {
 				if(!it_H.extremo()) it_H.avanzar();
 				it_X = X.ultimo();
 			}
+
 			return X;
 		}
 
 	// public members
 	public:
 		fft() {
-			is_ = &cin;
-			os_ = &cout;
+			assign_streams(&cin, &cout);
 		}
 
 		fft(istream *is) {
-			is_ = is;
-			os_ = &cout;
+			assign_streams(is, &cout);
 		}
 
 		fft(ostream *os) {
-			is_ = &cin;
-			os_ = os;
+			assign_streams(&cin, os);
 		}
 
 		fft(istream *is, ostream *os) {
-			is_ = is;
-			os_ = os;
+			assign_streams(is, os);
 		}
 
 		~fft() {
@@ -375,23 +355,19 @@ class ifft : public fft {
 	// public members
 	public:
 		ifft() {
-			is_ = &cin;
-			os_ = &cout;
+			assign_streams(&cin, &cout);
 		}
 
 		ifft(istream *is) {
-			is_ = is;
-			os_ = &cout;
+			assign_streams(is, &cout);
 		}
 
 		ifft(ostream *os) {
-			is_ = &cin;
-			os_ = os;
+			assign_streams(&cin, os);
 		}
 
 		ifft(istream *is, ostream *os) {
-			is_ = is;
-			os_ = os;
+			assign_streams(is, os);
 		}
 
 		~ifft() {
