@@ -34,7 +34,15 @@
     "functional": "cpp",
     "array": "cpp",
     "fstream": "cpp",
-    "locale": "cpp"
+    "locale": "cpp",
+    "system_error": "cpp",
+    "__functional_base": "cpp",
+    "atomic": "cpp",
+    "chrono": "cpp",
+    "limits": "cpp",
+    "memory": "cpp",
+    "ratio": "cpp",
+    "tuple": "cpp"
   },
   "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

@@ -5,6 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "REGRESSION FFT",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/tp2",
+      "args": ["-r", "./test/ones.input.txt"],
+      "preLaunchTask": "build",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    },
+    {
       "name": "DFT ones",
       "type": "cppdbg",
       "request": "launch",

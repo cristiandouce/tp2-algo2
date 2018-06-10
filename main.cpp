@@ -19,13 +19,16 @@
 
 #include "vendor/cmdline.h"
 #include "vendor/complejo.h"
+#include "src/program.h"
 #include "src/fourier.cpp"
 
 using namespace std;
 
 static void opt_input(string const &);
 static void opt_output(string const &);
+static void opt_regression(string const &);
 static void opt_method(string const &);
+static void opt_error(string const &);
 static void opt_help(string const &);
 
 /**
@@ -60,19 +63,23 @@ static void opt_help(string const &);
 static option_t options[] = {
 	{ 1, "i", "input", "-", opt_input, OPT_DEFAULT },
 	{ 1, "o", "output", "-", opt_output, OPT_DEFAULT },
-	{ 1, "m", "method", "DFT", opt_method, OPT_DEFAULT },
+	{ 1, "r", "regression", NULL, opt_regression, OPT_DEFAULT },
+	{ 1, "e", "error", "1e-3", opt_error, OPT_DEFAULT },
+	{ 1, "m", "method", "FFT", opt_method, OPT_DEFAULT },
 	{ 0, "h", "help", NULL, opt_help, OPT_DEFAULT },
 	{ 0, },
 };
 
-enum Methods {DFT,IDFT,FFT,IFFT};
+enum Methods { DFT, IDFT, FFT, IFFT };
 
 static Methods method;
 static istream *iss = 0;	// Input Stream (clase para manejo de los flujos de entrada)
 static ostream *oss = 0;	// Output Stream (clase para manejo de los flujos de salida)
+static istream *rss = 0;	// Regression Stream (clase para manejo de los flujos de entrada)
 static fstream ifs; 		  // Input File Stream (derivada de la clase ifstream que deriva de istream para el manejo de archivos)
 static fstream ofs;		    // Output File Stream (derivada de la clase ofstream que deriva de ostream para el manejo de archivos)
-
+static fstream rfs;		    // Output File Stream (derivada de la clase ofstream que deriva de ostream para el manejo de archivos)
+static double rerror;
 
 
 /*****************************************************/
@@ -105,9 +112,8 @@ opt_input(string const &arg) {
 static void
 opt_output(string const &arg) {
 	// Si el nombre del archivos es "-", usaremos la salida
-	// est�ndar. De lo contrario, abrimos un archivo en modo
+	// estandar. De lo contrario, abrimos un archivo en modo
 	// de escritura.
-	//
 	if (arg == "-") {
 		// Establezco la salida estandar cout como flujo de salida
 		oss = &cout;
@@ -123,6 +129,25 @@ opt_output(string const &arg) {
 		     << arg
 		     << "."
 		     << endl;
+		// EXIT: Terminacion del programa en su totalidad
+		exit(1);
+	}
+}
+
+static void
+opt_regression(string const &arg) {
+	if (!arg.empty()) {
+		// c_str(): Returns a pointer to an array that contains a null-terminated
+		// sequence of characters (i.e., a C-string) representing
+		// the current value of the string object.
+		rfs.open(arg.c_str(), ios::in);
+		rss = &rfs;
+	}
+
+	// Verificamos que el stream este OK.
+	//
+	if (!rss->good()) {
+		cerr << "cannot open " << arg << "." << endl;
 		// EXIT: Terminacion del programa en su totalidad
 		exit(1);
 	}
@@ -151,10 +176,14 @@ opt_method(string const &arg) {
 		exit(1);
 	}
 }
+static void
+opt_error(string const &arg) {
+	rerror = atof(arg.c_str());
+}
 
 static void
 opt_help(string const &arg) {
-	cout << "tp2 [-m method] [-i file] [-o file]"
+	cout << "tp2 [-m method] [-i file] [-o file] [-r file] [-e error]"
 	     << endl;
 	exit(0);
 }
@@ -166,7 +195,11 @@ main(int argc, char * const argv[]) {
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
 
-	ft *myft = 0;
+	program *myft = 0;
+
+	if (rss != 0) {
+		cout << "regression with error: " << rerror << endl;
+	}
 
 	if (method == DFT) {
 		myft = new dft(iss, oss);
@@ -178,10 +211,15 @@ main(int argc, char * const argv[]) {
 		myft = new fft(iss, oss);
 	}
 
+	// computar el resultado
 	myft->compute();
 
+	// obtener el codigo de la operacion
+	const int code = myft->code();
+
+  // destruir instancia
 	delete myft;
-	ifs.close();
-	ofs.close();
-	return 0;
+
+	// retornar codigo del programa
+	return code;
 }

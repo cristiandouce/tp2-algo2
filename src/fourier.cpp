@@ -9,10 +9,12 @@
 
 #include "../vendor/lista.h"
 #include "../vendor/complejo.h"
+
+#include "./program.h"
 #include "./utils.h"
 
 using namespace std;
-class ft {
+class ft : public program {
 	// private members
 
 	// protected members
@@ -45,19 +47,6 @@ class ft {
 			while(linestream >> aux) {
 				input_.insertar_despues(aux, it);
 				it = input_.ultimo();
-			}
-
-			// Si la cantidad de elementos del vector no es potencia de 2,
-			// agregamos 0s hasta completar tamaño con proxima potencia de 2
-			unsigned int tam = input_.tamano();
-			unsigned int v = next_power2(tam);
-
-			if (tam < v) {
-				for(int i=0; i < (v-tam); i++){
-					complejo aux (0.0, 0.0);
-					input_.insertar_despues(aux, it);
-					it = input_.ultimo();
-				}
 			}
 
 			// Error de formato en input stream.
@@ -224,7 +213,25 @@ class fft : public ft {
 			return false;
 		}
 
+		void right_pad_input() {
+			// Si la cantidad de elementos del vector no es potencia de 2,
+			// agregamos 0s hasta completar tamaño con proxima potencia de 2
+			unsigned int tam = input_.tamano();
+			unsigned int v = next_power2(tam);
+
+			if (tam < v) {
+				lista<complejo>::iterador it = input_.ultimo();
+
+				for(int i=0; i < (v-tam); i++){
+					complejo aux (0.0, 0.0);
+					input_.insertar_despues(aux, it);
+					it = input_.ultimo();
+				}
+			}
+		}
+
 		virtual void run_algorithm() {
+			right_pad_input();
 			lista<complejo> X = recursive_algorithm(input_);
 			lista<complejo>::iterador it = X.primero();
 
