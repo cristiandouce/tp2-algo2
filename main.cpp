@@ -20,7 +20,10 @@
 #include "vendor/cmdline.h"
 #include "vendor/complejo.h"
 #include "src/program.h"
-#include "src/fourier.cpp"
+#include "src/dft.h"
+#include "src/idft.h"
+#include "src/fft.h"
+#include "src/ifft.h"
 
 using namespace std;
 
@@ -197,6 +200,7 @@ main(int argc, char * const argv[]) {
 
 	program *myft = 0;
 
+
 	if (rss != 0) {
 		cout << "regression with error: " << rerror << endl;
 	}
@@ -222,4 +226,5 @@ main(int argc, char * const argv[]) {
 
 	// retornar codigo del programa
 	return code;
+
 }
