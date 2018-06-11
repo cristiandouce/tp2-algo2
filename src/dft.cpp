@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <iostream>
 
+#include "./src/utils.h"
 #include "./dft.h"
 
 using namespace std;
@@ -31,6 +32,8 @@ dft::run_algorithm() {
     // NOTE: retorno rapido si no hay nada que procesar
     //       en el arreglo de input_.
     if (input_.tamano() == 0) { return; }
+
+    right_pad_input(input_);
 
     double k, n, N = input_.tamano();
     double arg, norm = get_norm();

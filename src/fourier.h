@@ -12,7 +12,7 @@
 #include "../vendor/complejo.h"
 
 #include "./program.h"
-#include "./utils.h"
+#include "./src/utils.h"
 
 using namespace std;
 

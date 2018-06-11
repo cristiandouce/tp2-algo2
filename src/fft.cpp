@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <iostream>
 
+#include "./src/utils.h"
 #include "./fft.h"
 
 using namespace std;
@@ -27,26 +28,12 @@ fft::inverse() {
 }
 
 void
-fft::right_pad_input() {
-    // Si la cantidad de elementos del vector no es potencia de 2,
-    // agregamos 0s hasta completar tamaño con proxima potencia de 2
-    unsigned int tam = input_.tamano();
-    unsigned int v = next_power2(tam);
-
-    if (tam < v) {
-        lista<complejo>::iterador it = input_.ultimo();
-
-        for(int i=0; i < (v-tam); i++){
-            complejo aux (0.0, 0.0);
-            input_.insertar_despues(aux, it);
-            it = input_.ultimo();
-        }
-    }
-}
-
-void
 fft::run_algorithm() {
-    right_pad_input();
+    // NOTE: retorno rapido si no hay nada que procesar
+    //       en el arreglo de input_.
+    if (input_.tamano() == 0) { return; }
+
+    right_pad_input(input_);
     lista<complejo> X = recursive_algorithm(input_);
     lista<complejo>::iterador it = X.primero();
 
@@ -80,7 +67,7 @@ fft::recursive_algorithm(lista<complejo> &v) {
 
 void
 fft::particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd) {
-    size_t i = 0;
+    std::size_t i = 0;
     lista<complejo>::iterador it = v.primero();
     lista<complejo>::iterador itOdd;
     lista<complejo>::iterador itEven;

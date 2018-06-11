@@ -1,11 +1,13 @@
 #include <iomanip>
 #include <iostream>
 
+
 #include "./utils.h"
 
 using namespace std;
 
-unsigned int next_power2 (unsigned int const &l) {
+unsigned int 
+next_power2 (unsigned int const &l) {
   /* 
   Si l es potencia de 2, (l-1) tendra solo 1s en los bits menos
    significativos, entonces "l & (l-1)" siempre sera 0.
@@ -47,4 +49,22 @@ unsigned int next_power2 (unsigned int const &l) {
   p++;
 
   return p;
+}
+
+void
+right_pad_input(lista<complejo> &vector) {
+    // Si la cantidad de elementos del vector no es potencia de 2,
+    // agregamos 0s hasta completar tamaño con proxima potencia de 2
+    unsigned int tam = vector.tamano();
+    unsigned int v = next_power2(tam);
+
+    if (tam < v) {
+        lista<complejo>::iterador it = vector.ultimo();
+
+        for(int i=0; i < (v-tam); i++){
+            complejo aux (0.0, 0.0);
+            vector.insertar_despues(aux, it);
+            it = vector.ultimo();
+        }
+    }
 }

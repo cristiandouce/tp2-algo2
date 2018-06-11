@@ -10,8 +10,6 @@ class fft : public ft {
 	protected:
 		virtual bool inverse();
 
-		void right_pad_input();
-
 		virtual void run_algorithm();
 
 		lista<complejo> recursive_algorithm(lista<complejo> &v);
