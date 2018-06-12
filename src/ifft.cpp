@@ -13,7 +13,7 @@ ifft::ifft(istream *is): fft::fft(is) { }
 
 ifft::ifft(ostream *os): fft::fft(os) { }
 
-ifft::ifft(istream *is, ostream *os): fft::fft(is, os) {}
+ifft::ifft(istream *is, ostream *os): fft::fft(is, os) { }
 
 bool
 ifft::inverse() {

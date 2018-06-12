@@ -16,7 +16,7 @@ class fft : public ft {
 
 		void particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd);
 
-		lista<complejo> recompone(lista<complejo> &G, lista<complejo> &H, int const &N);
+		lista<complejo> recompone(lista<complejo> &G, lista<complejo> &H, double const &N);
 
 	// public members
 	public:

@@ -32,7 +32,14 @@ class ft : public program {
 		 */
 		void read_input_line();
 
+		/**
+		 * @brief Escribe una linea en el stream de output
+		 * 				lo almacenado en el arreglo output_
+		 */
+		void write_output_line();
+
 		double get_norm();
+		double get_norm(double const &);
 
 		complejo get_exp_complejo();
 

@@ -42,9 +42,29 @@ void ft::read_input_line() {
 	}
 }
 
+void ft::write_output_line() {
+	lista<complejo>::iterador out = output_.primero();
+
+	while(!out.extremo()) {
+		*os_ << out.dato() << " ";
+		out.avanzar();
+	}
+
+	*os_ << endl;
+
+	// nos aseguramos que el vector de salida
+	// este siempre vacio al terminar
+	output_.clear();
+}
+
 double
 ft::get_norm () {
 	double N = input_.tamano();
+	return get_norm(N);
+}
+
+double
+ft::get_norm(double const &N) {
 	return inverse() && (N > 0) ? 1/N : 1;
 }
 
@@ -62,6 +82,6 @@ ft::compute() {
 		// 	run_regression();
 		// }
 
-		// write_output_line();
+		write_output_line();
 	}
 }

@@ -11,7 +11,7 @@ idft::idft(istream *is): dft::dft(is) { }
 
 idft::idft(ostream *os): dft::dft(os) { }
 
-idft::idft(istream *is, ostream *os): dft::dft(is, os) {}
+idft::idft(istream *is, ostream *os): dft::dft(is, os) { }
 
 bool
 idft::inverse() {

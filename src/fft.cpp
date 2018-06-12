@@ -12,7 +12,7 @@ fft::fft(istream *is): ft::ft(is) { }
 
 fft::fft(ostream *os): ft::ft(os) { }
 
-fft::fft(istream *is, ostream *os): ft::ft(is, os) {}
+fft::fft(istream *is, ostream *os): ft::ft(is, os) { }
 
 bool
 fft::inverse() {
@@ -25,18 +25,13 @@ fft::run_algorithm() {
     //       en el arreglo de input_.
     if (input_.tamano() == 0) { return; }
 
+    // llevo tamano de entrada a una potencia de 2
+    // agregando 0s al final del arreglo
     right_pad_input(input_);
-    lista<complejo> X = recursive_algorithm(input_);
-    lista<complejo>::iterador it = X.primero();
 
-    double norm = get_norm();
-
-    while(!it.extremo()){
-        *os_ << it.dato() * norm << " ";
-        it.avanzar();
-    }
-
-    *os_ << endl;
+    // corro el algoritmo recursivo implementado
+    // desde el vector entrada al vector salidas
+    output_ = recursive_algorithm(input_);
 }
 
 lista<complejo>
@@ -79,7 +74,7 @@ fft::particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd) 
 }
 
 lista<complejo>
-fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
+fft::recompone(lista<complejo> &G, lista<complejo> &H, double const &N) {
     lista<complejo> X;
 
     lista<complejo>::iterador it_G = G.primero();
@@ -88,6 +83,7 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
 
     double arg;
     complejo j = get_exp_complejo();
+    double norm = N == input_.tamano() ? get_norm() : 1; // solo en la ultima iteracion
     complejo w;
 
     // combine
@@ -97,7 +93,7 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
         w = (cos(arg) + j.conjugado() * sin(arg));
 
         complejo t = w * it_H.dato();
-        X.insertar_despues(it_G.dato()+t,it_X);
+        X.insertar_despues((it_G.dato() + t) * norm, it_X);
         if(!it_G.extremo()) it_G.avanzar();
         if(!it_H.extremo()) it_H.avanzar();
         it_X = X.ultimo();
@@ -112,7 +108,7 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
         w = (cos(arg) + j.conjugado() * sin(arg));
 
         complejo t = w * it_H.dato();
-        X.insertar_despues(it_G.dato()-t,it_X);
+        X.insertar_despues((it_G.dato() - t) * norm, it_X);
         if(!it_G.extremo()) it_G.avanzar();
         if(!it_H.extremo()) it_H.avanzar();
         it_X = X.ultimo();
