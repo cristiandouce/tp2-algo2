@@ -19,7 +19,7 @@
 
 #include "vendor/cmdline.h"
 #include "vendor/complejo.h"
-#include "src/program.h"
+#include "src/fourier.h"
 #include "src/dft.h"
 #include "src/idft.h"
 #include "src/fft.h"
@@ -198,12 +198,7 @@ main(int argc, char * const argv[]) {
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
 
-	program *myft = 0;
-
-
-	if (rss != 0) {
-		cout << "regression with error: " << rerror << endl;
-	}
+	ft *myft = 0;
 
 	if (method == DFT) {
 		myft = new dft(iss, oss);
@@ -213,6 +208,11 @@ main(int argc, char * const argv[]) {
 		myft = new ifft(iss, oss);
 	} else {
 		myft = new fft(iss, oss);
+	}
+
+	// flaggeo el ft para que calcule la regresion
+	if (rss != 0) {
+		// myft->regression(rss, rerror);
 	}
 
 	// computar el resultado

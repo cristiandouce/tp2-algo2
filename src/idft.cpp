@@ -5,21 +5,13 @@
 
 using namespace std;
 
-idft::idft() {
-    assign_streams(&cin, &cout);
-}
+idft::idft(): dft::dft() { }
 
-idft::idft(istream *is) {
-    assign_streams(is, &cout);
-}
+idft::idft(istream *is): dft::dft(is) { }
 
-idft::idft(ostream *os) {
-    assign_streams(&cin, os);
-}
+idft::idft(ostream *os): dft::dft(os) { }
 
-idft::idft(istream *is, ostream *os) {
-    assign_streams(is, os);
-}
+idft::idft(istream *is, ostream *os): dft::dft(is, os) {}
 
 bool
 idft::inverse() {

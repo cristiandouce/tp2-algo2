@@ -6,21 +6,13 @@
 
 using namespace std;
 
-fft::fft() {
-    assign_streams(&cin, &cout);
-}
+fft::fft(): ft::ft() { }
 
-fft::fft(istream *is) {
-    assign_streams(is, &cout);
-}
+fft::fft(istream *is): ft::ft(is) { }
 
-fft::fft(ostream *os) {
-    assign_streams(&cin, os);
-}
+fft::fft(ostream *os): ft::ft(os) { }
 
-fft::fft(istream *is, ostream *os) {
-    assign_streams(is, os);
-}
+fft::fft(istream *is, ostream *os): ft::ft(is, os) {}
 
 bool
 fft::inverse() {

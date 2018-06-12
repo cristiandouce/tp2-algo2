@@ -5,26 +5,13 @@
 
 using namespace std;
 
-ft::ft() {
-	assign_streams(&cin, &cout);
-}
+ft::ft(): is_(&cin), os_(&cout) { }
 
-ft::ft(istream *is) {
-	assign_streams(is, &cout);
-}
+ft::ft(istream *is): is_(is), os_(&cout) { }
 
-ft::ft(ostream *os) {
-	assign_streams(&cin, os);
-}
+ft::ft(ostream *os): is_(&cin), os_(&cout) { }
 
-ft::ft(istream *is, ostream *os) {
-	assign_streams(is, os);
-}
-
-void ft::assign_streams(istream *is, ostream *os) {
-	is_ = is;
-	os_ = os;
-};
+ft::ft(istream *is, ostream *os): is_(is), os_(os) { }
 
 void ft::read_input_line() {
 	complejo aux;
@@ -71,5 +58,10 @@ ft::compute() {
 	while(!is_->eof()) {
 		read_input_line();
 		run_algorithm();
+		// if (isRegression) {
+		// 	run_regression();
+		// }
+
+		// write_output_line();
 	}
 }

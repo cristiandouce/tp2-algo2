@@ -17,19 +17,31 @@
 using namespace std;
 
 class ft : public program {
-	
+
 	protected:
 		lista<complejo> input_;
+		lista<complejo> output_;
 		istream *is_;
 		ostream *os_;
+		istream *rs_;
 
-		void assign_streams(istream *is, ostream *os);
-
+		/**
+		 * @brief lee una linea del stream de entrada
+		 * 				y la guarda en input_ para ser procesada
+		 * 				al llamar run_algoritm()
+		 */
 		void read_input_line();
 
-		double get_norm ();
+		double get_norm();
 
 		complejo get_exp_complejo();
+
+		/**
+		 * @brief corre el algoritmo de regression
+		 * 				para una linea del vector de entrada.
+		 *
+		 */
+		// void run_regression();
 
 		virtual bool inverse() = 0;
 
@@ -46,6 +58,18 @@ class ft : public program {
 
 		virtual ~ft(){};
 
+
+		/**
+		 * @brief Flaggea el la instancia para correr
+		 * 				la regression como salida del compute()
+		 */
+		// void regression(istream *rs, double &);
+
+		/**
+		 * @brief Inicializa el procesamiento del algoritmo
+		 * 				seleccionado.
+		 *
+		 */
 		void compute();
 };
 
