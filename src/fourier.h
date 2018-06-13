@@ -23,7 +23,11 @@ class ft : public program {
 		lista<complejo> output_;
 		istream *is_;
 		ostream *os_;
+
+		// para la regresion
 		istream *rs_;
+		double rerr_;
+		int regrN_;
 
 		/**
 		 * @brief lee una linea del stream de entrada
@@ -31,6 +35,7 @@ class ft : public program {
 		 * 				al llamar run_algoritm()
 		 */
 		void read_input_line();
+		void read_input_stream_line(istream *, lista<complejo> &);
 
 		/**
 		 * @brief Escribe una linea en el stream de output
@@ -44,11 +49,19 @@ class ft : public program {
 		complejo get_exp_complejo();
 
 		/**
-		 * @brief corre el algoritmo de regression
+		 * @brief Invoca el algoritmo de regression
 		 * 				para una linea del vector de entrada.
 		 *
 		 */
-		// void run_regression();
+		void run_regression();
+
+		/**
+		 * @brief Calcula laa regresion entre 2 listas de complejos
+		 * 				escribiendo su resultado a os_, y afectando el
+		 * 				codigo del programa para ser retornado
+		 *
+		 */
+		void calculate_regression(lista<complejo> &, lista<complejo> &);
 
 		virtual bool inverse() = 0;
 
@@ -70,7 +83,7 @@ class ft : public program {
 		 * @brief Flaggea el la instancia para correr
 		 * 				la regression como salida del compute()
 		 */
-		// void regression(istream *rs, double &);
+		void regression(istream *rs, double const &);
 
 		/**
 		 * @brief Inicializa el procesamiento del algoritmo

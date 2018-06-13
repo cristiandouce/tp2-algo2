@@ -42,7 +42,8 @@
     "limits": "cpp",
     "memory": "cpp",
     "ratio": "cpp",
-    "tuple": "cpp"
+    "tuple": "cpp",
+    "cmath": "cpp"
   },
   "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

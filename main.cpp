@@ -212,7 +212,7 @@ main(int argc, char * const argv[]) {
 
 	// flaggeo el ft para que calcule la regresion
 	if (rss != 0) {
-		// myft->regression(rss, rerror);
+		myft->regression(rss, rerror);
 	}
 
 	// computar el resultado
@@ -226,5 +226,4 @@ main(int argc, char * const argv[]) {
 
 	// retornar codigo del programa
 	return code;
-
 }

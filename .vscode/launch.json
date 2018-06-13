@@ -9,7 +9,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-r", "./test/ones.input.txt"],
+      "args": ["-r", "./test/ones.output.txt", "-i", "./test/ones.input.txt"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",

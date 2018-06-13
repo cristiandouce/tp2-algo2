@@ -11,7 +11,9 @@
  * @param l
  * @return unsigned int
  */
-unsigned int next_power2 (unsigned int const &l);
-void right_pad_input(lista<complejo> &vector);
+unsigned int next_power2 (unsigned int const &);
+void right_pad_input(lista<complejo> &);
+
+void zero_pad(lista<complejo> &, int &);
 
 #endif
