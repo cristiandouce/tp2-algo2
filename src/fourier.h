@@ -12,24 +12,56 @@
 #include "../vendor/complejo.h"
 
 #include "./program.h"
-#include "./utils.h"
+#include "./src/utils.h"
 
 using namespace std;
 
 class ft : public program {
-	
+
 	protected:
 		lista<complejo> input_;
+		lista<complejo> output_;
 		istream *is_;
 		ostream *os_;
 
-		void assign_streams(istream *is, ostream *os);
+		// para la regresion
+		istream *rs_;
+		double rerr_;
+		int regrN_;
 
+		/**
+		 * @brief lee una linea del stream de entrada
+		 * 				y la guarda en input_ para ser procesada
+		 * 				al llamar run_algoritm()
+		 */
 		void read_input_line();
+		void read_input_stream_line(istream *, lista<complejo> &);
 
-		double get_norm ();
+		/**
+		 * @brief Escribe una linea en el stream de output
+		 * 				lo almacenado en el arreglo output_
+		 */
+		void write_output_line();
+
+		double get_norm();
+		double get_norm(double const &);
 
 		complejo get_exp_complejo();
+
+		/**
+		 * @brief Invoca el algoritmo de regression
+		 * 				para una linea del vector de entrada.
+		 *
+		 */
+		void run_regression();
+
+		/**
+		 * @brief Calcula laa regresion entre 2 listas de complejos
+		 * 				escribiendo su resultado a os_, y afectando el
+		 * 				codigo del programa para ser retornado
+		 *
+		 */
+		void calculate_regression(lista<complejo> &, lista<complejo> &);
 
 		virtual bool inverse() = 0;
 
@@ -46,6 +78,18 @@ class ft : public program {
 
 		virtual ~ft(){};
 
+
+		/**
+		 * @brief Flaggea el la instancia para correr
+		 * 				la regression como salida del compute()
+		 */
+		void regression(istream *rs, double const &);
+
+		/**
+		 * @brief Inicializa el procesamiento del algoritmo
+		 * 				seleccionado.
+		 *
+		 */
 		void compute();
 };
 

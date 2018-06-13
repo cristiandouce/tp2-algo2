@@ -107,7 +107,7 @@ public:
 	// for( it = L.ultimo(); !it.extremo(); it.retroceder()) {
 	// 	// ...
 	// }
-	// 
+	//
 	// También,
 	//
 	// lista<int>::iterador it;
@@ -119,7 +119,7 @@ public:
 	//
 	iterador primero() const;
 	iterador ultimo() const;
-	
+
 };
 
 template<typename T>
@@ -196,7 +196,7 @@ bool lista<T>::iterador::operator!=(const typename lista<T>::iterador &it2) cons
 template<typename T>
 typename lista<T>::iterador const &lista<T>::iterador::operator=(iterador const &orig)
 {
-        if (this != &orig)
+  if (this != &orig)
 		actual_ = orig.actual_;
 	return *this;
 }
@@ -253,7 +253,7 @@ lista<T>::lista(const lista &orig) : pri_(0), ult_(0), tam_(orig.tam_)
 			pri_ = nuevo;
 		ant = nuevo;
 	}
-	
+
 	// Ajustamos el puntero al último elemento de la copia.
 	ult_ = ant;
 }
@@ -279,7 +279,7 @@ template<typename T>
 bool lista<T>::contiene(const T &elem) const
 {
 	nodo *iter;
-        
+
 	for (iter = pri_; iter != 0; iter = iter->sig_)
 		if (elem == iter->dato_)
 			return true;
@@ -438,7 +438,7 @@ lista<T> const &lista<T>::operator=(lista const &orig)
 		{
 			sig = iter->sig_;
 			delete iter;
-			iter = sig;	
+			iter = sig;
 		}
 
 		pri_ = 0;

@@ -1,25 +1,18 @@
 #include <iomanip>
 #include <iostream>
 
+#include "./src/utils.h"
 #include "./fft.h"
 
 using namespace std;
 
-fft::fft() {
-    assign_streams(&cin, &cout);
-}
+fft::fft(): ft::ft() { }
 
-fft::fft(istream *is) {
-    assign_streams(is, &cout);
-}
+fft::fft(istream *is): ft::ft(is) { }
 
-fft::fft(ostream *os) {
-    assign_streams(&cin, os);
-}
+fft::fft(ostream *os): ft::ft(os) { }
 
-fft::fft(istream *is, ostream *os) {
-    assign_streams(is, os);
-}
+fft::fft(istream *is, ostream *os): ft::ft(is, os) { }
 
 bool
 fft::inverse() {
@@ -27,37 +20,18 @@ fft::inverse() {
 }
 
 void
-fft::right_pad_input() {
-    // Si la cantidad de elementos del vector no es potencia de 2,
-    // agregamos 0s hasta completar tamaño con proxima potencia de 2
-    unsigned int tam = input_.tamano();
-    unsigned int v = next_power2(tam);
-
-    if (tam < v) {
-        lista<complejo>::iterador it = input_.ultimo();
-
-        for(int i=0; i < (v-tam); i++){
-            complejo aux (0.0, 0.0);
-            input_.insertar_despues(aux, it);
-            it = input_.ultimo();
-        }
-    }
-}
-
-void
 fft::run_algorithm() {
-    right_pad_input();
-    lista<complejo> X = recursive_algorithm(input_);
-    lista<complejo>::iterador it = X.primero();
+    // NOTE: retorno rapido si no hay nada que procesar
+    //       en el arreglo de input_.
+    if (input_.tamano() == 0) { return; }
 
-    double norm = get_norm();
+    // llevo tamano de entrada a una potencia de 2
+    // agregando 0s al final del arreglo
+    right_pad_input(input_);
 
-    while(!it.extremo()){
-        *os_ << it.dato() * norm << " ";
-        it.avanzar();
-    }
-
-    *os_ << endl;
+    // corro el algoritmo recursivo implementado
+    // desde el vector entrada al vector salidas
+    output_ = recursive_algorithm(input_);
 }
 
 lista<complejo>
@@ -80,7 +54,7 @@ fft::recursive_algorithm(lista<complejo> &v) {
 
 void
 fft::particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd) {
-    size_t i = 0;
+    std::size_t i = 0;
     lista<complejo>::iterador it = v.primero();
     lista<complejo>::iterador itOdd;
     lista<complejo>::iterador itEven;
@@ -100,7 +74,7 @@ fft::particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd) 
 }
 
 lista<complejo>
-fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
+fft::recompone(lista<complejo> &G, lista<complejo> &H, double const &N) {
     lista<complejo> X;
 
     lista<complejo>::iterador it_G = G.primero();
@@ -109,6 +83,7 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
 
     double arg;
     complejo j = get_exp_complejo();
+    double norm = N == input_.tamano() ? get_norm() : 1; // solo en la ultima iteracion
     complejo w;
 
     // combine
@@ -118,7 +93,7 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
         w = (cos(arg) + j.conjugado() * sin(arg));
 
         complejo t = w * it_H.dato();
-        X.insertar_despues(it_G.dato()+t,it_X);
+        X.insertar_despues((it_G.dato() + t) * norm, it_X);
         if(!it_G.extremo()) it_G.avanzar();
         if(!it_H.extremo()) it_H.avanzar();
         it_X = X.ultimo();
@@ -133,7 +108,7 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, int const &N) {
         w = (cos(arg) + j.conjugado() * sin(arg));
 
         complejo t = w * it_H.dato();
-        X.insertar_despues(it_G.dato()-t,it_X);
+        X.insertar_despues((it_G.dato() - t) * norm, it_X);
         if(!it_G.extremo()) it_G.avanzar();
         if(!it_H.extremo()) it_H.avanzar();
         it_X = X.ultimo();

@@ -10,15 +10,13 @@ class fft : public ft {
 	protected:
 		virtual bool inverse();
 
-		void right_pad_input();
-
 		virtual void run_algorithm();
 
 		lista<complejo> recursive_algorithm(lista<complejo> &v);
 
 		void particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd);
 
-		lista<complejo> recompone(lista<complejo> &G, lista<complejo> &H, int const &N);
+		lista<complejo> recompone(lista<complejo> &G, lista<complejo> &H, double const &N);
 
 	// public members
 	public:
