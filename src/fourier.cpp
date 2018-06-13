@@ -120,8 +120,8 @@ void ft::run_regression() {
 
 	// completo los arreglos con 0s para poder calcular la regresion
 	int maxSize = max(Rk.tamano(), Xk.tamano());
-	int zerosToRk = maxSize - Rk.tamano();
-	int zerosToXk = maxSize - Xk.tamano();
+	unsigned int zerosToRk = maxSize - Rk.tamano();
+	unsigned int zerosToXk = maxSize - Xk.tamano();
 
 	zero_pad(Rk, zerosToRk);
 	zero_pad(Xk, zerosToXk);

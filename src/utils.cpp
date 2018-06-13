@@ -57,14 +57,14 @@ right_pad_input(lista<complejo> &vector) {
   // agregamos 0s hasta completar tamaño con proxima potencia de 2
   unsigned int tam = vector.tamano();
   unsigned int v = next_power2(tam);
-  int zeros = tam - v;
+  unsigned int zeros = v - tam;
   zero_pad(vector, zeros);
 }
 
 
-void zero_pad(lista<complejo> &vector, int &zeros) {
+void zero_pad(lista<complejo> &vector, unsigned int const &zeros) {
   // NOTE: retorno si no debo agregar nada
-  if (zeros <= 0) {
+  if (zeros == 0) {
     return;
   }
 
