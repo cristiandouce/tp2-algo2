@@ -1,0 +1,41 @@
+FFT 1 signal 10000 points x100 runs
+
+real	0m15.082s
+user	0m14.221s
+sys	0m0.574s
+Done.
+
+FFT 10 signals 1000 points x100 runs
+
+real	0m7.774s
+user	0m7.110s
+sys	0m0.445s
+Done.
+
+FFT 100 signals 100 points x100 runs
+
+real	0m7.633s
+user	0m6.901s
+sys	0m0.499s
+Done.
+
+DFT 1 signal 10000 points x10 runs
+
+real	5m39.588s
+user	5m9.980s
+sys	0m2.252s
+Done.
+
+DFT 10 signals 1000 points x10 runs
+
+real	0m11.898s
+user	0m11.680s
+sys	0m0.078s
+Done.
+
+DFT 100 signals 100 points x10 runs
+
+real	0m2.046s
+user	0m1.973s
+sys	0m0.048s
+Done.

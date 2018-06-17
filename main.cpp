@@ -4,8 +4,8 @@
  *             : Douce Suarez, Cristian G. <cristiandouce@yahoo.com.ar>
  * Version     : 1.0.0
  * License     : MIT
- * Description : Linea de comando que implementa DFT/IDFT sobre senales
- *               de entrada de variable real o compleja.
+ * Description : Linea de comando que implementa FFT/IFFT/DFT/IDFT
+ *               sobre senales de entrada de variable real o compleja.
  */
 
 #include <fstream>
@@ -81,7 +81,7 @@ static ostream *oss = 0;	// Output Stream (clase para manejo de los flujos de sa
 static istream *rss = 0;	// Regression Stream (clase para manejo de los flujos de entrada)
 static fstream ifs; 		  // Input File Stream (derivada de la clase ifstream que deriva de istream para el manejo de archivos)
 static fstream ofs;		    // Output File Stream (derivada de la clase ofstream que deriva de ostream para el manejo de archivos)
-static fstream rfs;		    // Output File Stream (derivada de la clase ofstream que deriva de ostream para el manejo de archivos)
+static fstream rfs;		    // Regression File Stream (derivada de la clase ifstream que deriva de ostream para el manejo de archivos)
 static double rerror;
 
 

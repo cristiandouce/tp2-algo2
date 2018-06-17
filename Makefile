@@ -8,12 +8,12 @@ CXXFLAGS = -Isrc -Ivendor -I. -isystem $(CXXARGS)
 LDFLAGS  =
 CXX = g++
 
-build-dev: bin/tp2
+build: bin/tp2
 
 bin/tp2:
 	$(CXX) $(CXXFLAGS) $(ENTRY) $(SRCS) -o $(OUTFILE)
 
-test-perf:
-	time $(OUTFILE) -i ./test/files/ones.input.txt -o ./test/files/ones.output.txt
+test: build
+	@./test/tests.sh
 
 .PHONY: bin/tp2
