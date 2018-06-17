@@ -9,7 +9,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.input.txt", "-o", "./test/files/_working-dir.output.txt", "-m", "DFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-o", "./examples/_working-dir.output.txt", "-m", "DFT"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -22,7 +22,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.output.txt", "-o", "./test/files/_working-dir.regression.txt", "-m", "IDFT"],
+      "args": ["-i", "./examples/_working-dir.output.txt", "-o", "./examples/_working-dir.regression.txt", "-m", "IDFT"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -35,7 +35,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.input.txt", "-o", "./test/files/_working-dir.output.txt", "-m", "FFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-o", "./examples/_working-dir.output.txt", "-m", "FFT"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -48,7 +48,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.output.txt", "-o", "./test/files/_working-dir.regression.txt", "-m", "IFFT"],
+      "args": ["-i", "./examples/_working-dir.output.txt", "-o", "./examples/_working-dir.regression.txt", "-m", "IFFT"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -61,7 +61,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.input.txt", "-r", "./test/files/_working-dir.output.txt"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-r", "./examples/_working-dir.output.txt"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -74,7 +74,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.input.txt", "-r", "./test/files/_working-dir.output.txt", "-m", "DFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-r", "./examples/_working-dir.output.txt", "-m", "DFT"],
       "preLaunchTask": "build",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -83,87 +83,99 @@
       "MIMode": "lldb"
     },
     {
-      "name": "DFT ones win10",
+      "name": "DFT ones win_10",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.input.txt", "-o", "./test/files/_working-dir.output.txt", "-m", "DFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-o", "./examples/_working-dir.output.txt", "-m", "DFT"],
       "preLaunchTask": "build_win10",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
       "windows": {
-         "MIMode": "gdb",
-         "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+        "MIMode": "lldb",
+        "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
       }
     },
     {
-      "name": "IDFT ones win10",
+      "name": "IDFT ones win_10",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.output.txt", "-o", "./test/files/_working-dir.regression.txt", "-m", "IDFT"],
+      "args": ["-i", "./examples/_working-dir.output.txt", "-o", "./examples/_working-dir.regression.txt", "-m", "IDFT"],
       "preLaunchTask": "build_win10",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
       "windows": {
-         "MIMode": "gdb",
-         "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+        "MIMode": "lldb",
+        "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
       }
     },
     {
-      "name": "FFT ones win10",
+      "name": "FFT ones win_10",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/_working-dir.input.txt", "-o", "./test/files/ones.output.FFT.txt", "-m", "FFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-o", "./examples/_working-dir.output.txt", "-m", "FFT"],
       "preLaunchTask": "build_win10",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
       "windows": {
-         "MIMode": "gdb",
-         "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+        "MIMode": "lldb",
+        "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
       }
     },
     {
-      "name": "IFFT ones win10",
+      "name": "IFFT ones win_10",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/ones.output.FFT.txt", "-o", "./test/files/ones.input.back.IFFT.txt", "-m", "IFFT"],
+      "args": ["-i", "./examples/_working-dir.output.txt", "-o", "./examples/_working-dir.regression.txt", "-m", "IFFT"],
       "preLaunchTask": "build_win10",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
       "windows": {
-         "MIMode": "gdb",
-         "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+        "MIMode": "lldb",
+        "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
       }
     },
     {
-      "name": "FFT big win10",
+      "name": "Regression FFT win_10",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/Tbwavfs11025.txt", "-o", "./test/files/Tbwavfs11025_FFT.txt", "-m", "FFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-r", "./examples/_working-dir.output.txt"],
       "preLaunchTask": "build_win10",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
       "windows": {
-         "MIMode": "gdb",
-         "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+        "MIMode": "lldb",
+        "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
       }
     },
     {
-      "name": "IFFT big win10",
+      "name": "Regression DFT win_10",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/bin/tp2",
-      "args": ["-i", "./test/files/Tbwavfs11025_FFT.txt", "-o", "./test/files/Tbwavfs11025_IFFT.txt", "-m", "IFFT"],
+      "args": ["-i", "./examples/_working-dir.input.txt", "-r", "./examples/_working-dir.output.txt", "-m", "DFT"],
       "preLaunchTask": "build_win10",
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
       "windows": {
-         "MIMode": "gdb",
-         "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+        "MIMode": "lldb",
+        "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
       }
     }
   ]
