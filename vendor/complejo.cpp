@@ -127,8 +127,6 @@ operator==(complejo const &x, complejo const &y) {
 ostream &
 operator<<(ostream &os, const complejo &c) {
 	// prints: ({c.re_}, {c.im_})
-	os << setprecision(6) << fixed;
-
 	return os << "(" << c.re_ << ", " << c.im_ << ")";
 }
 
