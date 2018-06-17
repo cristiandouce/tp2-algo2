@@ -35,7 +35,7 @@ class ft : public program {
 		 * 				al llamar run_algoritm()
 		 */
 		void read_input_line();
-		void read_input_stream_line(istream *, lista<complejo> &);
+		// void read_input_stream_line(istream *, lista<complejo> &);
 
 		/**
 		 * @brief Escribe una linea en el stream de output

@@ -16,37 +16,11 @@ ft::ft(ostream *os): is_(&cin), os_(&cout), rs_(0), rerr_(0), regrN_(1) { }
 ft::ft(istream *is, ostream *os): is_(is), os_(os), rs_(0), rerr_(0), regrN_(1) { }
 
 void ft::read_input_line() {
-	ft::read_input_stream_line(is_, input_);
-}
-
-void ft::read_input_stream_line(istream *is, lista<complejo> &vector) {
-	complejo aux;
-	string line;
-
-	getline(*is, line);
-
-	stringstream linestream(line);
-
 	// nos aseguramos que el input_ lista
 	// este siempre vacío antes de empezar.
-	vector.clear();
+	input_.clear();
 
-	lista<complejo>::iterador it;
-	it = vector.ultimo();
-
-	// leemos cada valor
-	while(linestream >> aux) {
-		vector.insertar_despues(aux, it);
-		it = vector.ultimo();
-	}
-
-	// Error de formato en input stream.
-	// Detenemos la ejecución del programa.
-	if (linestream.bad()) {
-		cerr << "cannot read from input stream." << endl;
-		exit(1);
-	}
-
+	read_input_stream_line(is_, input_);
 }
 
 void ft::write_output_line() {
