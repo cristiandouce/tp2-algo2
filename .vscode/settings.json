@@ -45,5 +45,8 @@
     "tuple": "cpp",
     "cmath": "cpp"
   },
-  "C_Cpp.intelliSenseEngineFallback": "Enabled"
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "[cpp]": {
+    "editor.autoIndent": true
+  }
 }
