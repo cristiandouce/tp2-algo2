@@ -14,6 +14,12 @@ bin/tp2:
 	$(CXX) $(CXXFLAGS) $(ENTRY) $(SRCS) -o $(OUTFILE)
 
 test: build
-	@./test/tests.sh
+	./test/tests.sh
+
+test-valgrind: bin/tp2
+  # memcheck is default --tool
+	valgrind --leak-check=yes $(OUTFILE) -i ./test/files/test_1_signals_10000_points.txt -o ./test/files/_garbage.txt
+	valgrind --leak-check=yes $(OUTFILE) -i ./test/files/test_10_signals_1000_points.txt -o ./test/files/_garbage.txt
+	valgrind --leak-check=yes $(OUTFILE) -i ./test/files/test_100_signals_100_points.txt -o ./test/files/_garbage.txt
 
 .PHONY: bin/tp2
