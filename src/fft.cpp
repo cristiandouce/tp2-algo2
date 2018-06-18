@@ -56,16 +56,12 @@ void
 fft::particion(lista<complejo> &v, lista<complejo> &even, lista<complejo> &odd) {
     std::size_t i = 0;
     lista<complejo>::iterador it = v.primero();
-    lista<complejo>::iterador itOdd;
-    lista<complejo>::iterador itEven;
 
     do {
         if (i % 2) {
-            itOdd = odd.ultimo();
-            odd.insertar_despues(it.dato(), itOdd);
+            odd.insertar_despues(it.dato(), odd.ultimo());
         } else {
-            itEven = even.ultimo();
-            even.insertar_despues(it.dato(), itEven);
+            even.insertar_despues(it.dato(), even.ultimo());
         }
 
         i++;
@@ -79,7 +75,6 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, double const &N) {
 
     lista<complejo>::iterador it_G = G.primero();
     lista<complejo>::iterador it_H = H.primero();
-    lista<complejo>::iterador it_X = X.ultimo();
 
     double arg;
     complejo j = get_exp_complejo();
@@ -93,10 +88,9 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, double const &N) {
         w = (cos(arg) + j.conjugado() * sin(arg));
 
         complejo t = w * it_H.dato();
-        X.insertar_despues((it_G.dato() + t) * norm, it_X);
+        X.insertar_despues((it_G.dato() + t) * norm, X.ultimo());
         if(!it_G.extremo()) it_G.avanzar();
         if(!it_H.extremo()) it_H.avanzar();
-        it_X = X.ultimo();
     }
 
     it_G = G.primero();
@@ -108,10 +102,9 @@ fft::recompone(lista<complejo> &G, lista<complejo> &H, double const &N) {
         w = (cos(arg) + j.conjugado() * sin(arg));
 
         complejo t = w * it_H.dato();
-        X.insertar_despues((it_G.dato() - t) * norm, it_X);
+        X.insertar_despues((it_G.dato() - t) * norm, X.ultimo());
         if(!it_G.extremo()) it_G.avanzar();
         if(!it_H.extremo()) it_H.avanzar();
-        it_X = X.ultimo();
     }
 
     return X;

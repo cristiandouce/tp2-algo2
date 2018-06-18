@@ -91,3 +91,15 @@ void read_input_stream_line(istream *is, lista<complejo> &vector) {
 		exit(1);
 	}
 }
+
+
+void write_output_stream_line(ostream *os, lista<complejo> &vector) {
+	lista<complejo>::iterador out = vector.primero();
+
+	while(!out.extremo()) {
+		*os << out.dato() << " ";
+		out.avanzar();
+	}
+
+	*os << endl;
+}

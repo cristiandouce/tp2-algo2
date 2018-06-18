@@ -20,6 +20,7 @@ void ft::read_input_line() {
 	// este siempre vacío antes de empezar.
 	input_.clear();
 
+	// leemos desde la entrada seleccionada del programa
 	read_input_stream_line(is_, input_);
 }
 
@@ -30,14 +31,8 @@ void ft::write_output_line() {
 		return;
 	}
 
-	lista<complejo>::iterador out = output_.primero();
-
-	while(!out.extremo()) {
-		*os_ << out.dato() << " ";
-		out.avanzar();
-	}
-
-	*os_ << endl;
+	// escribimos a la salida del programa seleccionada
+	write_output_stream_line(os_, output_);
 
 	// nos aseguramos que el vector de salida
 	// este siempre vacio al terminar
