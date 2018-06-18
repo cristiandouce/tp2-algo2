@@ -3,14 +3,16 @@ SRCS = $(wildcard ./src/*.cpp ./vendor/*.cpp)
 ENTRY = main.cpp
 OUTDIR = bin
 OUTFILE = $(OUTDIR)/$(PROJ)
-CXXARGS = -static-libgcc -static-libstdc++ -Wall -g 
+CXXARGS = -static-libgcc -static-libstdc++ -Wall -g
 CXXFLAGS = -Isrc -Ivendor -I. -isystem $(CXXARGS)
 LDFLAGS  =
 CXX = g++
 
-build-dev: bin/tp2
+build: bin/tp2
 
 bin/tp2:
 	$(CXX) $(CXXFLAGS) $(ENTRY) $(SRCS) -o $(OUTFILE)
+test: build
+	./test/tests.sh
 
 .PHONY: bin/tp2
